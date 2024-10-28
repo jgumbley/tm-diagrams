@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Threat Modeling Diagram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
         body { font-family: Arial, sans-serif; }
         .node { fill: #aaf; stroke: #333; stroke-width: 1.5px; cursor: pointer; }
@@ -12,9 +13,8 @@
     </style>
 </head>
 <body>
-    <h1>TM Article revision interactive diagrams</h1>
-    <ul>
-        <li><a href="crux.html">Follow the dataflow</a></li>
-    </ul>
+    <h1>Follow the data-flow</h1>
+    <svg id="diagram" width="800" height="600"></svg>
+    <script src="diagram.js"></script>
 </body>
 </html>
