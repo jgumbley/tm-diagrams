@@ -105,9 +105,9 @@ const line = svg.append("line")
       stickieText2b.style("opacity", 0);
    });
 
-// Add "Phishing" stickie note above the line
+// Add "Phishing" stickie note, centered above the left side of the line
 const stickieRect1 = svg.append("rect")
-   .attr("x", 300)
+   .attr("x", 260)                    // Centered further to the left
    .attr("y", 50) 
    .attr("width", 80)
    .attr("height", 40)
@@ -115,7 +115,7 @@ const stickieRect1 = svg.append("rect")
    .style("opacity", 0);
 
 const stickieText1a = svg.append("text")
-   .attr("x", 340)
+   .attr("x", 300)                    // Centered with the sticky note
    .attr("y", 65)
    .attr("fill", "#333")
    .attr("font-size", "10px")
@@ -125,7 +125,7 @@ const stickieText1a = svg.append("text")
    .style("opacity", 0);
 
 const stickieText1b = svg.append("text")
-   .attr("x", 340)
+   .attr("x", 300)
    .attr("y", 80)
    .attr("fill", "#333")
    .attr("font-size", "10px")
@@ -134,9 +134,9 @@ const stickieText1b = svg.append("text")
    .text("with links")
    .style("opacity", 0);
 
-// Add "Interception" stickie note above the line
+// Add "Interception" stickie note, centered above the right side of the line
 const stickieRect2 = svg.append("rect")
-   .attr("x", 400)
+   .attr("x", 370)                    // Centered closer to the right side
    .attr("y", 50)
    .attr("width", 100)
    .attr("height", 40)
@@ -144,7 +144,7 @@ const stickieRect2 = svg.append("rect")
    .style("opacity", 0);
 
 const stickieText2a = svg.append("text")
-   .attr("x", 450)
+   .attr("x", 420)
    .attr("y", 65)
    .attr("fill", "#333")
    .attr("font-size", "10px")
@@ -154,7 +154,7 @@ const stickieText2a = svg.append("text")
    .style("opacity", 0);
 
 const stickieText2b = svg.append("text")
-   .attr("x", 450)
+   .attr("x", 420)
    .attr("y", 80)
    .attr("fill", "#333")
    .attr("font-size", "10px")
