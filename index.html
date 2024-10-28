@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Threat Modeling Diagram</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .node { fill: #aaf; stroke: #333; stroke-width: 1.5px; cursor: pointer; }
+        .link { fill: none; stroke: #777; stroke-width: 2px; }
+        .boundary { fill: none; stroke: #999; stroke-dasharray: 5,5; }
+    </style>
+</head>
+<body>
+    <h1>Threat Modeling Diagram</h1>
+    <svg id="diagram" width="800" height="600"></svg>
+    <script src="diagram.js"></script>
+</body>
+</html>
