@@ -1,69 +1,58 @@
-// Select the SVG container
-const svg = d3.select("#diagram");
+const svg = d3.select("svg");
 
-// Define nodes (components) and links (data flows) for a basic DFD example
-const nodes = [
-    { id: "User", type: "actor", x: 100, y: 300 },
-    { id: "Frontend", type: "component", x: 300, y: 300 },
-    { id: "Backend", type: "component", x: 500, y: 300 },
-    { id: "Database", type: "datastore", x: 700, y: 300 },
-];
+// Define the arrow marker
+svg.append("defs").append("marker")
+   .attr("id", "arrow")
+   .attr("viewBox", "0 0 10 10")
+   .attr("refX", 9)
+   .attr("refY", 5)
+   .attr("markerWidth", 6)
+   .attr("markerHeight", 6)
+   .attr("orient", "auto")
+   .append("path")
+   .attr("d", "M 0 0 L 10 5 L 0 10 Z")  // Triangle shape for arrowhead
+   .attr("fill", "#777");               // Color of arrowhead
 
-const links = [
-    { source: "User", target: "Frontend", threat: "Spoofing" },
-    { source: "Frontend", target: "Backend", threat: "Tampering" },
-    { source: "Backend", target: "Database", threat: "Repudiation" },
-];
+// Draw the component boxes with hard-coded dimensions and positions
+svg.append("rect")
+   .attr("x", 50)              // Fixed X position
+   .attr("y", 100)             // Fixed Y position
+   .attr("width", 150)         // Fixed width for larger box
+   .attr("height", 60)         // Fixed height for larger box
+   .attr("fill", "#777");      // Box color
 
-// Draw links (data flows) with lines
-svg.selectAll(".link")
-    .data(links)
-    .enter()
-    .append("line")
-    .attr("class", "link")
-    .attr("x1", d => nodes.find(n => n.id === d.source).x)
-    .attr("y1", d => nodes.find(n => n.id === d.source).y)
-    .attr("x2", d => nodes.find(n => n.id === d.target).x)
-    .attr("y2", d => nodes.find(n => n.id === d.target).y)
-    .on("mouseover", (event, d) => {
-        d3.select(event.currentTarget).style("stroke", "red");
-        d3.select("#threat-label").text(`Threat: ${d.threat}`).style("opacity", 1);
-    })
-    .on("mouseout", (event) => {
-        d3.select(event.currentTarget).style("stroke", "#777");
-        d3.select("#threat-label").style("opacity", 0);
-    });
+svg.append("rect")
+   .attr("x", 300)             // Fixed X position for the second box
+   .attr("y", 100)             // Fixed Y position (aligned horizontally with first box)
+   .attr("width", 150)         // Fixed width for consistency
+   .attr("height", 60)         // Fixed height
+   .attr("fill", "#777");      // Box color
 
-// Draw nodes (components) as circles
-svg.selectAll(".node")
-    .data(nodes)
-    .enter()
-    .append("circle")
-    .attr("class", "node")
-    .attr("cx", d => d.x)
-    .attr("cy", d => d.y)
-    .attr("r", 30)
-    .on("click", (event, d) => {
-        alert(`Component: ${d.id}`);
-    });
-
-// Label each node
-svg.selectAll(".label")
-    .data(nodes)
-    .enter()
-    .append("text")
-    .attr("class", "label")
-    .attr("x", d => d.x)
-    .attr("y", d => d.y - 40)
-    .attr("text-anchor", "middle")
-    .text(d => d.id);
-
-// Optional: Add a threat label that appears on hover
+// Add labels inside each box with fixed positions and Trebuchet MS font
 svg.append("text")
-    .attr("id", "threat-label")
-    .attr("x", 400)
-    .attr("y", 50)
-    .attr("text-anchor", "middle")
-    .style("font-weight", "bold")
-    .style("font-size", "16px")
-    .style("opacity", 0);
+   .attr("x", 125)             // Fixed X position for text inside the first box
+   .attr("y", 135)             // Fixed Y position for text centered in the box
+   .attr("fill", "#fff")       // Text color
+   .attr("font-size", "14px")  // Font size
+   .attr("font-family", "Trebuchet MS, sans-serif") // Apply Trebuchet MS font
+   .attr("text-anchor", "middle")
+   .text("Less trusted origin");
+
+svg.append("text")
+   .attr("x", 375)             // Fixed X position for text inside the second box
+   .attr("y", 135)             // Fixed Y position for text centered in the box
+   .attr("fill", "#fff")       // Text color
+   .attr("font-size", "14px")  // Font size
+   .attr("font-family", "Trebuchet MS, sans-serif") // Apply Trebuchet MS font
+   .attr("text-anchor", "middle")
+   .text("Protected component");
+
+// Draw the horizontal line with an arrow between the boxes, with fixed start and end points
+svg.append("line")
+   .attr("x1", 200)            // Fixed starting X position just past the first box
+   .attr("y1", 130)            // Fixed Y position aligned with the box centers
+   .attr("x2", 300)            // Fixed ending X position at the start of the second box
+   .attr("y2", 130)            // Fixed Y position
+   .attr("stroke", "#777")
+   .attr("stroke-width", 2)
+   .attr("marker-end", "url(#arrow)");  // Attach arrow marker
